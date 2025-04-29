@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <section class="banner">
+        <h2>Bem-vindo ao PetShop!</h2>
+        <p>Os melhores produtos para seu pet com os melhores preços</p>
+    </section>
+
+    <section class="products">
+        <h2>Nossos Produtos</h2>
+        <div class="product-grid">
+            {% for product in products %}
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="{{ url_for('static', filename='images/' + product.product_photo) if product.product_photo else url_for('static', filename='images/default.jpg') }}" alt="{{ product.product_name }}">
+                </div>
+                <div class="product-info">
+                    <h3>{{ product.product_name }}</h3>
+                    <p class="description">{{ product.product_description }}</p>
+                    <p class="price">R$ {{ "%.2f"|format(product.product_price) }}</p>
+                    <p class="stock">{{ product.stock_quantity }} unidades disponíveis</p>
+                    <button class="add-to-cart">Adicionar ao carrinho</button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
